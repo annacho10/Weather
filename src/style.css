@@ -53,3 +53,8 @@ li {
 .daily img {
   height: 48px;
 }
+
+.openSource {
+  margin: 0px auto;
+  max-width: 800px;
+}
