@@ -1,3 +1,18 @@
+function time(timestamp) {
+  let date = new Date(timestamp);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[date.getDay()];
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${day} ${hours}:${minutes}`;
+}
+
 // 밑에 7도 및 추가 5일 수정, 계산 기본값 수정, 시간 각 국가의 시간으로 바뀌어야 하지 않을까?
 // temp max, min 모두 수정되어야 함...., visibility를 다른것으로 바꿔야 할듯?
 function displayWeather(response) {
@@ -5,8 +20,9 @@ function displayWeather(response) {
   document.querySelector(".temperature").innerHTML = Math.round(
     response.data.main.temp
   );
+  document.querySelector("#day-time").innerHTML = time(response.data.dt * 1000);
   document.querySelector("#description").innerHTML =
-    response.data.weather[0].main;
+    response.data.weather[0].description;
   document.querySelector("#temp-max").innerHTML = Math.round(
     response.data.main.temp_max
   );
@@ -75,28 +91,3 @@ function showCelsius(event) {
 }
 let celsius = document.querySelector("#celsius");
 celsius.addEventListener("click", showCelsius);
-
-function time(current) {
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  let day = days[current.getDay()];
-  let hours = current.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = current.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-  return `${day} ${hours}:${minutes}`;
-}
-let now = new Date();
-let dateTime = document.querySelector("#day-time");
-dateTime.innerHTML = time(now);
