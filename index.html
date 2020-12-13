@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌞AnnaCHO</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="weather-app">
+        <form class="location">
+          <div class="row">
+            <div class="col-5 city"></div>
+            <div class="col-5">
+              <input
+                type="search"
+                class="form-control"
+                placeholder="Enter city"
+                autofocus="on"
+              />
+            </div>
+            <div class="col-1">
+              <input type="submit" class="btn btn-primary" value="🔍" />
+            </div>
+            <div class="col-1">
+              <input type="submit" class="btn btn-success" value="📍" />
+            </div>
+          </div>
+        </form>
+        <div class="row today">
+          <div class="col-4">
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/64/fog.png"
+              alt="fog"
+            />
+            <span class="temperature"></span>
+            <span class="units">
+              <a href="#" id="celsius">°C</a>
+              |
+              <a href="#" id="fahrenheit">°F</a>
+            </span>
+          </div>
+          <div class="col-4">
+            <ul>
+              <li id="day-time"></li>
+              <li id="description"></li>
+              <li>
+                H:<span id="temp-max"></span>° L:<span id="temp-min"></span>°
+              </li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <ul>
+              <li>Visibility <span id="visibility"></span>km</li>
+              <li>Humidity: <span id="humidity"></span>%</li>
+              <li>Wind: <span id="wind"></span>mph</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row daily">
+          <div class="col-sm">
+            Sat
+            <br />
+            <img src="images/partly cloudy.png" alt="partly cloudy" />
+            <br />
+
+            <br />
+            12° 6°
+          </div>
+          <div class="col-sm">
+            Sun
+            <br />
+            <img src="images/cloudy.png" alt="cloudy" />
+            <br />
+
+            <br />
+            10° 5°
+          </div>
+          <div class="col-sm">
+            Mon
+            <br />
+            <img src="images/cloudy.png" alt="cloudy" />
+            <br />
+
+            <br />
+            9° 7°
+          </div>
+          <div class="col-sm">
+            Tue
+            <br />
+            <img src="images/cloudy.png" alt="cloudy" />
+            <br />
+            60%
+            <br />
+            9° 6°
+          </div>
+          <div class="col-sm">
+            Wed
+            <br />
+            <img src="images/cloudy.png" alt="cloudy" />
+            <br />
+            40%
+            <br />
+            8° 6°
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="src/script.js"></script>
+  </body>
+</html>
