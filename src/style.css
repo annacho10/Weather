@@ -46,6 +46,15 @@ li::first-letter {
   top: -34px;
 }
 
+.active {
+  color: black;
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
+}
+
 .today img {
   height: 64px;
   position: relative;
