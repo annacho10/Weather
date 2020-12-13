@@ -17,6 +17,15 @@ function time(timestamp) {
 // temp max, min 모두 수정되어야 함...., visibility를 다른것으로 바꿔야 할듯?
 function displayWeather(response) {
   document.querySelector(".city").innerHTML = response.data.name;
+  document
+    .querySelector("#icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+  document
+    .querySelector("#icon")
+    .setAttribute("alt", response.data.weather[0].description);
   document.querySelector(".temperature").innerHTML = Math.round(
     response.data.main.temp
   );
