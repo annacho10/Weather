@@ -1,7 +1,13 @@
-function time(timestamp) {
+// 밑에 추가됨
+function formatDay(timestamp) {
   let date = new Date(timestamp);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let day = days[date.getDay()];
+  return `${day}`;
+}
+
+function time(timestamp) {
+  let date = new Date(timestamp);
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -10,7 +16,7 @@ function time(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  return `${day} ${hours}:${minutes}`;
+  return `${formatDay(timestamp)} ${hours}:${minutes}`;
 }
 
 function displayWeather(response) {
@@ -45,12 +51,48 @@ function displayWeather(response) {
     response.data.wind.speed
   );
 }
+//밑에 추가됨
+function displayForecast(response) {
+  let forecastElement = document.querySelector(".daily");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+  for (let index = 1; index < 7; index++) {
+    forecast = response.data.daily[index];
+    forecastElement.innerHTML += `
+      <div class="col-sm">
+        <ul>
+          <li>${formatDay(forecast.dt * 1000)}</li>
+          <img src="http://openweathermap.org/img/wn/${
+            forecast.weather[0].icon
+          }@2x.png" alt="weather icon" />
+          <li><strong>${Math.round(
+            forecast.temp.max
+          )}°</strong> <small>${Math.round(forecast.temp.min)}°</small>
+          </li>
+          <li>${forecast.weather[0].main}</li>
+        </ul>
+      </div>
+      `;
+  }
+}
+
+//밑에 추가됨
+function displayGeolocation(response) {
+  let latitude = response.data.coord.lat;
+  let longitude = response.data.coord.lon;
+  let apiKey = "33ccc5935c23e13f1d3bcc5768a8d1d3";
+  let units = "metric";
+  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}&exclude=current,minutely,hourly`;
+  axios.get(apiUrl).then(displayForecast);
+}
 
 function searchCity(city) {
   let apiKey = "33ccc5935c23e13f1d3bcc5768a8d1d3";
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayWeather);
+  //밑에 추가됨
+  axios.get(apiUrl).then(displayGeolocation);
 }
 
 function handleSubmit(event) {
@@ -68,6 +110,9 @@ function showLocation(position) {
   let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayWeather);
+  //밑에 추가됨
+  apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}&exclude=current,minutely,hourly`;
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function searchGeolocation(event) {
